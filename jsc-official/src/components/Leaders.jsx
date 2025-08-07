@@ -7,6 +7,17 @@ import leader3 from '../assets/Hamza_usthad.jpg'
 
 
 const leaders = [
+  
+  { 
+    name: 'Dr. Quthubuzzaman Sheikh Yusuf Sulthan Shah Qadiri Chishthi (QA)', 
+    role: 'Spiritual Leader & Founder',
+    image: leader2,
+    description: 'A renowned Islamic scholar with over 50 years of experience in Islamic jurisprudence and Sufi teachings.',
+    expertise: [''],
+    quote: 'Education is the foundation upon which we build a righteous society.',
+    achievements: '',
+    icon: <Crown className="w-6 h-6" />
+  },
   { 
     name: 'Sheikh Usthad Muhammed Abdu Raheem Musliyar, Valapuram', 
     role: 'Spiritual Leader & Scholar',
@@ -17,16 +28,6 @@ const leaders = [
     achievements: '50+ Years Experience',
     icon: <BookOpen className="w-6 h-6" />
     
-  },
-  { 
-    name: 'Dr. Quthubuzzaman Sheikh Yusuf Sulthan Shah Qadiri Chishthi (QA)', 
-    role: 'Spiritual Leader & Founder',
-    image: leader2,
-    description: 'A renowned Islamic scholar with over 50 years of experience in Islamic jurisprudence and Sufi teachings.',
-    expertise: [''],
-    quote: 'Education is the foundation upon which we build a righteous society.',
-    achievements: '',
-    icon: <Crown className="w-6 h-6" />
   },
   { 
     name: 'Sheikh Hamaza Usthad, Moonaakkal', 

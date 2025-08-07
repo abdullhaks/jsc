@@ -33,8 +33,8 @@ const App = () => {
     <div className="min-h-screen font-sans relative overflow-x-hidden">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <Hero />
-      <Leaders />
       <UpcomingEvents />
+      <Leaders />
       <RecentUploads />
       <PublicEvents />
       <Publications />
