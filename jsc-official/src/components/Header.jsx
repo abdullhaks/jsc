@@ -12,8 +12,8 @@ export const Header = ({ activeSection, setActiveSection }) => {
 
   const navItems = [
     { id: 'hero', label: 'Home', icon: <Globe className="w-4 h-4" /> },
-    { id: 'leaders', label: 'Leaders', icon: <Users className="w-4 h-4" /> },
     { id: 'upcomingEvents', label: 'Events', icon: <Calendar className="w-4 h-4" /> },
+    { id: 'leaders', label: 'Leaders', icon: <Users className="w-4 h-4" /> },
     { id: 'recentUploads', label: 'Uploads', icon: <Youtube className="w-4 h-4" /> },
     { id: 'publicEvents', label: 'Public Events', icon: <Calendar className="w-4 h-4" /> },
     { id: 'publications', label: 'Publications', icon: <BookOpen className="w-4 h-4" /> },

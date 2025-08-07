@@ -30,7 +30,23 @@ const events = [
     attendees: '',
     status: ''
   },
-];
+  {
+    eventName: 'Weekly Swalath Majlis',
+    eventPosterImage: "",
+    dateAndTime: new Date('2025-08-01T19:00:00'),
+    location: 'Jeelani Masjid, Valancheri, Malppuram, Kerala',
+    locationLink: jeelaniLocation,
+    description: 'join weekly swalath majis',
+    category: 'Spiritual',
+    attendees: '',
+    status: ''
+  }
+].sort((a, b) => {
+  const now = new Date('2025-08-07T16:15:00Z'); // Current date and time in UTC (09:45 PM IST)
+  const diffA = a.dateAndTime - now;
+  const diffB = b.dateAndTime - now;
+  return diffB > 0 ? (diffA > 0 ? a.dateAndTime - b.dateAndTime : 1) : (diffA > 0 ? -1 : b.dateAndTime - a.dateAndTime);
+});
 
 const UpcomingEvents = () => {
   const [timeLeft, setTimeLeft] = useState({});
