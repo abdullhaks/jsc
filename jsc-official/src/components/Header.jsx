@@ -73,7 +73,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
       </div>
 
       <motion.header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-50  transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-xl shadow-xl' 
             : 'bg-white/90 backdrop-blur-md shadow-lg'
@@ -82,12 +82,12 @@ export const Header = ({ activeSection, setActiveSection }) => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center py-3">
             
             {/* Logo Section */}
             <motion.div 
-              className="flex items-center space-x-3 cursor-pointer group"
+              className="flex items-center space-x-4 cursor-pointer group"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => scrollToSection(e, 'hero')}
@@ -101,7 +101,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                 <img 
                   src={jsc_logo1} 
                   alt="Jeelani Studies Centre" 
-                  className="relative w-12 h-12 rounded-xl object-cover shadow-lg"
+                  className="relative w-12 h-12 rounded-md object-cover shadow-lg"
                 />
                 <motion.div
                   className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
@@ -115,7 +115,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
               
               <div className="hidden sm:block">
                 <motion.h1 
-                  className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent"
+                  className="text-xl lg:text-xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -123,7 +123,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   Jeelani Studies Centre
                 </motion.h1>
                 <motion.p 
-                  className="text-xs lg:text-sm text-gray-500 font-medium"
+                  className="text-xs lg:text-[10px] text-gray-500 font-medium"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
