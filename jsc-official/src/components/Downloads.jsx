@@ -5,7 +5,7 @@ import { Download, FileText, BookOpen, Calendar, Eye, FileCheck, Star } from 'lu
 const downloads = [
   {
     id: 1,
-    title: 'Mafaheemu yajibu an thusaha',
+    title: 'Mafaheemu Yajibu An Thusaha',
     link: 'https://ik.imagekit.io/aksWebSolutions/JSC/mafaheem.pdf?updatedAt=1754492501066',
     description: 'A comprehensive Arabic book that addresses common misconceptions within the Muslim Ummah in the modern era. It provides insightful analysis and clarifications on contemporary Islamic discourse.',
     category: 'books',

@@ -9,7 +9,7 @@ const sjiaLocation = "https://maps.app.goo.gl/tRXGDLnN5P8Ac8z46"
 
 const events = [
   {
-    eventName: 'മീലാദ് @ 1500 campaign inauguration & Monthly Swalath Majlis',
+    eventName: 'മീലാദ് @ 1500 Campaign inauguration & Monthly Swalath Majlis',
     eventPosterImage: "https://ik.imagekit.io/aksWebSolutions/JSC/event1.jpg",
     dateAndTime: new Date('2025-08-10T16:00:00'),
     location: 'Irimbiliyam, Mankeri,Valanchery,Malappuram, Kerala',
