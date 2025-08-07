@@ -346,6 +346,7 @@ const UpcomingEvents = () => {
                   </motion.div>
 
                   {/* CTA Button */}
+                  <a href={event.locationLink}>
                   <motion.button
                     className="w-full group/btn flex items-center justify-center space-x-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                     whileHover={{ scale: 1.02, y: -2 }}
@@ -354,9 +355,10 @@ const UpcomingEvents = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.3 + 0.8, duration: 0.6 }}
                   >
-                    <span>Register Now</span>
+                    <span>Get Location</span>
                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                   </motion.button>
+                  </a>
                 </div>
 
                 {/* Decorative Elements */}
