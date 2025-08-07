@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, BookOpen, Users, Calendar, Youtube, FileText, Download, Mail, Globe, ChevronDown, Star } from 'lucide-react';
+import { Menu, X, BookOpen, Users, Calendar, Youtube, FileText, Download, Mail, Globe, ChevronDown, Star, Languages } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import jsc_logo1 from '../assets/jsc_logo1.png';
 
@@ -73,7 +73,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
       </div>
 
       <motion.header
-        className={`fixed top-0 w-full z-50  transition-all duration-300 ${
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-xl shadow-xl' 
             : 'bg-white/90 backdrop-blur-md shadow-lg'
@@ -82,18 +82,19 @@ export const Header = ({ activeSection, setActiveSection }) => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto px-4 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center py-3">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-3 min-h-[64px]">
             
-            {/* Logo Section */}
+            {/* Logo Section - Fixed width to prevent layout shifts */}
             <motion.div 
-              className="flex items-center space-x-4 cursor-pointer group"
+              className="flex items-center space-x-3 cursor-pointer group flex-shrink-0"
+              style={{ minWidth: 'fit-content' }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => scrollToSection(e, 'hero')}
             >
               <motion.div 
-                className="relative"
+                className="relative flex-shrink-0"
                 whileHover={{ rotate: 5 }}
                 transition={{ duration: 0.3 }}
               >
@@ -101,21 +102,21 @@ export const Header = ({ activeSection, setActiveSection }) => {
                 <img 
                   src={jsc_logo1} 
                   alt="Jeelani Studies Centre" 
-                  className="relative w-12 h-12 rounded-md object-cover shadow-lg"
+                  className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-md object-cover shadow-lg"
                 />
                 <motion.div
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
+                  className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.5, duration: 0.3 }}
                 >
-                  <Star className="w-2 h-2 text-white" />
+                  <Star className="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" />
                 </motion.div>
               </motion.div>
               
-              <div className="hidden sm:block">
+              <div className="flex flex-col justify-center min-w-0">
                 <motion.h1 
-                  className="text-xl lg:text-xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent"
+                  className="text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent leading-tight truncate"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -123,7 +124,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   Jeelani Studies Centre
                 </motion.h1>
                 <motion.p 
-                  className="text-xs lg:text-[10px] text-gray-500 font-medium"
+                  className="text-[10px] sm:text-xs text-gray-500 font-medium leading-tight truncate"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
@@ -133,13 +134,13 @@ export const Header = ({ activeSection, setActiveSection }) => {
               </div>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            {/* Desktop Navigation - Hidden on mobile */}
+            <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.id}
                   onClick={(e) => scrollToSection(e, item.id)}
-                  className={`relative flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 group ${
+                  className={`relative flex items-center space-x-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 group ${
                     activeSection === item.id
                       ? 'text-white bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg'
                       : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
@@ -163,12 +164,15 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   <span className="relative z-10 whitespace-nowrap">{item.label}</span>
                 </motion.button>
               ))}
+            </nav>
 
-              {/* Language Dropdown */}
-              <div className="relative ml-4">
+            {/* Right Section - Language & Mobile Menu */}
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              {/* Desktop Language Dropdown */}
+              <div className="relative hidden lg:block">
                 <motion.button
                   onClick={() => setShowLangDropdown(!showLangDropdown)}
-                  className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 transition-all duration-300"
+                  className="flex items-center space-x-2 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 transition-all duration-300"
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -205,25 +209,65 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   )}
                 </AnimatePresence>
               </div>
-            </nav>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 rounded-xl hover:bg-emerald-50/50 transition-colors relative z-10"
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                animate={{ rotate: isMenuOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
+              {/* Mobile Language Button - Separate from menu toggle */}
+              <div className="relative lg:hidden">
+                <motion.button
+                  onClick={() => setShowLangDropdown(!showLangDropdown)}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-50/50 hover:bg-emerald-100/70 text-emerald-600 transition-all duration-300 border border-emerald-200/50"
+                  whileTap={{ scale: 0.95 }}
+                  title="Change Language"
+                >
+                  <Languages className="w-5 h-5" />
+                </motion.button>
+
+                <AnimatePresence>
+                  {showLangDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-44 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                    >
+                      {languages.map((lang) => (
+                        <motion.button
+                          key={lang.code}
+                          onClick={() => changeLanguage(lang.code)}
+                          className={`w-full flex items-center space-x-3 px-3 py-2.5 text-left transition-colors ${
+                            i18n.language === lang.code 
+                              ? 'bg-emerald-50 text-emerald-700' 
+                              : 'hover:bg-gray-50 text-gray-700'
+                          }`}
+                          whileHover={{ x: 4 }}
+                        >
+                          <span className="text-base">{lang.flag}</span>
+                          <span className="font-medium text-sm">{lang.label}</span>
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl hover:bg-emerald-50/50 transition-colors relative z-10"
+                whileTap={{ scale: 0.95 }}
               >
-                {isMenuOpen ? (
-                  <X className="w-6 h-6 text-gray-700" />
-                ) : (
-                  <Menu className="w-6 h-6 text-gray-700" />
-                )}
-              </motion.div>
-            </motion.button>
+                <motion.div
+                  animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMenuOpen ? (
+                    <X className="w-6 h-6 text-gray-700" />
+                  ) : (
+                    <Menu className="w-6 h-6 text-gray-700" />
+                  )}
+                </motion.div>
+              </motion.button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
@@ -257,33 +301,6 @@ export const Header = ({ activeSection, setActiveSection }) => {
                       <span>{item.label}</span>
                     </motion.button>
                   ))}
-                  
-                  {/* Mobile Language Selection */}
-                  <motion.div 
-                    className="px-4 py-3 border-t border-gray-100 mt-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <p className="text-sm font-medium text-gray-500 mb-2">Language</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {languages.map((lang) => (
-                        <motion.button
-                          key={lang.code}
-                          onClick={() => changeLanguage(lang.code)}
-                          className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${
-                            i18n.language === lang.code 
-                              ? 'bg-emerald-100 text-emerald-700' 
-                              : 'bg-gray-50 text-gray-700 hover:bg-emerald-50'
-                          }`}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span>{lang.flag}</span>
-                          <span className="text-sm font-medium">{lang.label}</span>
-                        </motion.button>
-                      ))}
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
             )}
