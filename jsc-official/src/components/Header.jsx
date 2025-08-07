@@ -1,0 +1,309 @@
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X, BookOpen, Users, Calendar, Youtube, FileText, Download, Mail, Globe, ChevronDown, Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import jsc_logo1 from '../assets/jsc_logo1.png';
+
+export const Header = ({ activeSection, setActiveSection }) => {
+  const { i18n } = useTranslation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showLangDropdown, setShowLangDropdown] = useState(false);
+
+  const navItems = [
+    { id: 'hero', label: 'Home', icon: <Globe className="w-4 h-4" /> },
+    { id: 'leaders', label: 'Leaders', icon: <Users className="w-4 h-4" /> },
+    { id: 'upcomingEvents', label: 'Events', icon: <Calendar className="w-4 h-4" /> },
+    { id: 'recentUploads', label: 'Uploads', icon: <Youtube className="w-4 h-4" /> },
+    { id: 'publicEvents', label: 'Public Events', icon: <Calendar className="w-4 h-4" /> },
+    { id: 'publications', label: 'Publications', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'downloads', label: 'Downloads', icon: <Download className="w-4 h-4" /> },
+    { id: 'contact', label: 'Contact', icon: <Mail className="w-4 h-4" /> },
+  ];
+
+  const languages = [
+    { code: 'en', label: 'English', flag: '🇺🇸' },
+    { code: 'ml', label: 'മലയാളം', flag: '🇮🇳' },
+    { code: 'ur', label: 'اردو', flag: '🇵🇰' },
+    { code: 'ar', label: 'العربية', flag: '🇸🇦' },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    e.stopPropagation(); // Prevent event bubbling
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(sectionId);
+      // Delay closing the menu to ensure scroll completes
+      setTimeout(() => {
+        setIsMenuOpen(false);
+        setShowLangDropdown(false);
+      }, 300);
+    }
+  };
+
+  const changeLanguage = (code) => {
+    i18n.changeLanguage(code);
+    setShowLangDropdown(false);
+    setIsMenuOpen(false);
+  };
+
+  const getCurrentLanguage = () => {
+    return languages.find(lang => lang.code === i18n.language) || languages[0];
+  };
+
+  return (
+    <>
+      {/* Decorative Islamic Pattern Background */}
+      <div className="fixed top-0 w-full h-20 z-40 opacity-100 pointer-events-none">
+        <div 
+          className="w-full h-full bg-gradient-to-r from-emerald-600 to-teal-600"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      <motion.header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-white/95 backdrop-blur-xl shadow-xl' 
+            : 'bg-white/90 backdrop-blur-md shadow-lg'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <div className="mx-auto px-4 sm:px-6 lg:px-6">
+          <div className="flex justify-between items-center py-3">
+            
+            {/* Logo Section */}
+            <motion.div 
+              className="flex items-center space-x-3 cursor-pointer group"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => scrollToSection(e, 'hero')}
+            >
+              <motion.div 
+                className="relative"
+                whileHover={{ rotate: 5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                <img 
+                  src={jsc_logo1} 
+                  alt="Jeelani Studies Centre" 
+                  className="relative w-12 h-12 rounded-xl object-cover shadow-lg"
+                />
+                <motion.div
+                  className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.3 }}
+                >
+                  <Star className="w-2 h-2 text-white" />
+                </motion.div>
+              </motion.div>
+              
+              <div className="hidden sm:block">
+                <motion.h1 
+                  className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  Jeelani Studies Centre
+                </motion.h1>
+                <motion.p 
+                  className="text-xs lg:text-sm text-gray-500 font-medium"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  Islamic Education & Spiritual Excellence
+                </motion.p>
+              </div>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.id}
+                  onClick={(e) => scrollToSection(e, item.id)}
+                  className={`relative flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 group ${
+                    activeSection === item.id
+                      ? 'text-white shadow-lg'
+                      : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
+                  }`}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                >
+                  {activeSection === item.id && (
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl"
+                      layoutId="activeNavBg"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10 transition-transform group-hover:scale-110">
+                    {item.icon}
+                  </span>
+                  <span className="relative z-10 whitespace-nowrap">{item.label}</span>
+                </motion.button>
+              ))}
+
+              {/* Language Dropdown */}
+              <div className="relative ml-4">
+                <motion.button
+                  onClick={() => setShowLangDropdown(!showLangDropdown)}
+                  className="flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50 transition-all duration-300"
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="text-lg">{getCurrentLanguage().flag}</span>
+                  <span className="hidden xl:block">{getCurrentLanguage().label.split(' ')[0]}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showLangDropdown ? 'rotate-180' : ''}`} />
+                </motion.button>
+
+                <AnimatePresence>
+                  {showLangDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                    >
+                      {languages.map((lang) => (
+                        <motion.button
+                          key={lang.code}
+                          onClick={() => changeLanguage(lang.code)}
+                          className={`w-full flex items-center space-x-3 px-4 py-3 text-left transition-colors ${
+                            i18n.language === lang.code 
+                              ? 'bg-emerald-50 text-emerald-700' 
+                              : 'hover:bg-gray-50 text-gray-700'
+                          }`}
+                          whileHover={{ x: 4 }}
+                        >
+                          <span className="text-lg">{lang.flag}</span>
+                          <span className="font-medium">{lang.label}</span>
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-3 rounded-xl hover:bg-emerald-50/50 transition-colors relative z-10"
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-700" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-700" />
+                )}
+              </motion.div>
+            </motion.button>
+          </div>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="lg:hidden border-t border-gray-100 overflow-hidden bg-white/50 backdrop-blur-md"
+              >
+                <div className="py-4 space-y-1">
+                  {navItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      onClick={(e) => scrollToSection(e, item.id)}
+                      className={`flex items-center space-x-3 w-full text-left px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg mx-2 ${
+                        activeSection === item.id
+                          ? 'text-emerald-700 bg-emerald-50'
+                          : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
+                      }`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05, duration: 0.3 }}
+                      whileHover={{ x: 4 }}
+                    >
+                      <span className="transition-transform hover:scale-110">
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                    </motion.button>
+                  ))}
+                  
+                  {/* Mobile Language Selection */}
+                  <motion.div 
+                    className="px-4 py-3 border-t border-gray-100 mt-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <p className="text-sm font-medium text-gray-500 mb-2">Language</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {languages.map((lang) => (
+                        <motion.button
+                          key={lang.code}
+                          onClick={() => changeLanguage(lang.code)}
+                          className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${
+                            i18n.language === lang.code 
+                              ? 'bg-emerald-100 text-emerald-700' 
+                              : 'bg-gray-50 text-gray-700 hover:bg-emerald-50'
+                          }`}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span>{lang.flag}</span>
+                          <span className="text-sm font-medium">{lang.label}</span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.header>
+
+      {/* Click outside to close dropdowns */}
+      {(showLangDropdown || isMenuOpen) && (
+        <div 
+          className="fixed inset-0 z-40" 
+          onClick={() => {
+            setShowLangDropdown(false);
+            setIsMenuOpen(false);
+          }}
+        />
+      )}
+    </>
+  );
+};
+
+export default Header;
