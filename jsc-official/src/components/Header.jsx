@@ -38,12 +38,11 @@ export const Header = ({ activeSection, setActiveSection }) => {
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setActiveSection(sectionId);
-      // Delay closing the menu to ensure scroll completes
       setTimeout(() => {
         setIsMenuOpen(false);
         setShowLangDropdown(false);
@@ -83,7 +82,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-6">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
             
             {/* Logo Section */}
@@ -142,7 +141,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   onClick={(e) => scrollToSection(e, item.id)}
                   className={`relative flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 group ${
                     activeSection === item.id
-                      ? 'text-white shadow-lg'
+                      ? 'text-white bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg'
                       : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
                   }`}
                   whileHover={{ y: -1 }}
@@ -292,7 +291,6 @@ export const Header = ({ activeSection, setActiveSection }) => {
         </div>
       </motion.header>
 
-      {/* Click outside to close dropdowns */}
       {(showLangDropdown || isMenuOpen) && (
         <div 
           className="fixed inset-0 z-40" 

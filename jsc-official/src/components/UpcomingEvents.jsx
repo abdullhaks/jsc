@@ -4,13 +4,16 @@ import { Calendar, Clock, MapPin, ExternalLink, Sparkles, Users, Star, ArrowRigh
 import event1 from '../assets/event1.jpg';
 import dhikr from '../assets/dhikr.jpg'
 
+const jeelaniLocation = "https://maps.app.goo.gl/VY6p12Zt2vt8C8W69";
+const sjiaLocation = "https://maps.app.goo.gl/tRXGDLnN5P8Ac8z46"
+
 const events = [
   {
     eventName: 'മീലാദ് @ 1500 campaign inauguration & Monthly Swalath Majlis',
     eventPosterImage: "https://ik.imagekit.io/aksWebSolutions/JSC/event1.jpg",
     dateAndTime: new Date('2025-08-10T16:00:00'),
     location: 'Irimbiliyam, Mankeri,Valanchery,Malappuram, Kerala',
-    locationLink: 'https://maps.app.goo.gl/tRXGDLnN5P8Ac8z46',
+    locationLink: sjiaLocation,
     description: 'Join us for a transformative spiritual journey through traditional Sufi meditation practices and dhikr.',
     category: 'Spiritual',
     attendees: '',
@@ -21,7 +24,7 @@ const events = [
     eventPosterImage: "",
     dateAndTime: new Date('2025-08-08T19:00:00'),
     location: 'Jeelani Masjid, Valancheri, Malppuram, Kerala',
-    locationLink: 'https://maps.app.goo.gl/VY6p12Zt2vt8C8W69',
+    locationLink: jeelaniLocation,
     description: 'join weekly swalath majis',
     category: 'Spiritual',
     attendees: '',
