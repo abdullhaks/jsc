@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Globe, ShoppingCart, ExternalLink, Star, Calendar, User, Tag, Filter, Search } from 'lucide-react';
+import { BookOpen, Globe, ShoppingCart, ExternalLink, Star, Calendar, User, Tag, Search } from 'lucide-react';
 
 const publications = [
   {
@@ -66,20 +66,8 @@ const publications = [
   }
 ];
 
-const categories = ['all', 'spirituality', 'education', 'jurisprudence', 'ethics'];
-
 const Publications = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
   const [hoveredItem, setHoveredItem] = useState(null);
-
-  const filteredPublications = publications.filter(pub => {
-    const matchesCategory = selectedCategory === 'all' || pub.category === selectedCategory;
-    const matchesSearch = pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         pub.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         pub.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -178,48 +166,6 @@ const Publications = () => {
           </motion.p>
         </motion.div>
 
-        {/* Search and Filter Section */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-            {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search publications..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-gray-200/50 bg-white/80 backdrop-blur-sm focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all duration-300"
-              />
-            </div>
-
-            {/* Category Filters */}
-            <div className="flex gap-2 flex-wrap">
-              {categories.map((category) => (
-                <motion.button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-gradient-to-r from-emerald-500 to-blue-500 text-white shadow-lg'
-                      : 'bg-white/70 text-gray-600 hover:bg-white hover:shadow-md'
-                  }`}
-                >
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
         {/* Publications Grid */}
         <motion.div
           className="grid md:grid-cols-2 xl:grid-cols-2 gap-8"
@@ -229,7 +175,7 @@ const Publications = () => {
           viewport={{ once: true }}
         >
           <AnimatePresence>
-            {filteredPublications.map((pub, index) => (
+            {publications.map((pub, index) => (
               <motion.div
                 key={pub.id}
                 variants={itemVariants}
@@ -414,24 +360,6 @@ const Publications = () => {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {/* No results message */}
-        {filteredPublications.length === 0 && (
-          <motion.div
-            className="text-center py-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-              <Search className="w-12 h-12 text-gray-400" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No publications found</h3>
-            <p className="text-gray-600 max-w-md mx-auto">
-              Try adjusting your search terms or category filters to find what you're looking for.
-            </p>
-          </motion.div>
-        )}
 
         {/* Call to Action */}
         <motion.div

@@ -188,11 +188,11 @@ const UpcomingEvents = () => {
                 href={jeelaniLocation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-light hover:text-purple-600 transition-colors flex items-center space-x-1"
+                className="font-light text-cyan-600 transition-colors flex items-center space-x-1"
               >
                 <span>The Weekly Swalath Majlis is normally held every Friday after Maghrib prayers at Jeelani Masjid, Valanchery, Malappuram, Kerala.
                 </span>
-                <ExternalLink className="w-8 h-8" />
+                <ExternalLink className="w-7 h-7" />
                 
               </a>
 
@@ -200,11 +200,11 @@ const UpcomingEvents = () => {
                 href={sjiaLocation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-light hover:text-purple-600 transition-colors flex items-center space-x-1"
+                className="font-light text-purple-600 transition-colors flex items-center space-x-1"
               >
                 <span>The Monthly Swalath Majlis normally takes place on the second Sunday of every month after Maghrib prayers at Sheikh Jeelani Islamic Academy, Mankery, Irimbiliyam, Malappuram, Kerala.
                 </span>
-                <ExternalLink className="w-8 h-8" />
+                <ExternalLink className="w-10 h-10" />
                 
                 
               </a>

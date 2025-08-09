@@ -381,7 +381,7 @@ const PublicEvents = () => {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {[
-              { number: '25+', label: 'Events Organized', icon: <Calendar className="w-6 h-6" /> },
+              { number: '500+', label: 'Events Organized', icon: <Calendar className="w-6 h-6" /> },
               { number: '2000+', label: 'Community Members', icon: <Users className="w-6 h-6" /> },
               { number: '500+', label: 'Photos Captured', icon: <Camera className="w-6 h-6" /> },
               { number: '100%', label: 'Memorable Moments', icon: <Heart className="w-6 h-6" /> },

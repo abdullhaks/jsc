@@ -138,7 +138,7 @@ const Footer = () => {
               whileHover={{ rotate: [0, -5, 5, 0] }}
               transition={{ duration: 0.5 }}
             >
-              <img src="https://ik.imagekit.io/aksWebSolutions/JSC/JSC_APP_ICON2.png?updatedAt=1754539864015" alt="Jeelani Studies Centre" className="w-full h-full rounded-2xl object-cover" />
+              <img src="https://ik.imagekit.io/aksWebSolutions/JSC/JSC_APP_ICON2.png?updatedAt=1754539864015" alt="Jeelani Studies Centre" className="w-full h-full rounded-2xl " />
             </motion.div>
             <div className="text-left">
               <motion.h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
