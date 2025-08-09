@@ -72,12 +72,12 @@ const Contact = () => {
           import.meta.env.VITE_EMAILJS_USER_ID
         );
 
-        await emailjs.send(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, // second template
-          templateParams,
-          import.meta.env.VITE_EMAILJS_USER_ID
-        );
+        // await emailjs.send(
+        //   import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        //   import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, // second template
+        //   templateParams,
+        //   import.meta.env.VITE_EMAILJS_USER_ID
+        // );
 
 
       message.success('Enquiry sent successfully!');
