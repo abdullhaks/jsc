@@ -56,23 +56,33 @@ const Contact = () => {
        const templateParams = {
         name: formData.name,
         email: formData.email,
+        phone: formData.phone || "Not provided",
+        subject: formData.subject || "No subject",
+        inquiryType: inquiryTypes.find(t => t.id === selectedInquiryType)?.label || "General",
         message: formData.message,
-        subject:formData.subject,
-        phone:formData.phone,
-        date: new Date().toLocaleDateString(),
-        year: new Date().getFullYear(),
+        date: new Date().toLocaleString()
       };
 
 
-      // await emailjs.send(
-      //   import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      //   import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      //   templateParams,
-      //   import.meta.env.VITE_EMAILJS_USER_ID
-      // );
-      // message.success('Enquiry sent successfully!');
 
-      message.info('Sorry! message service is under maintenance now.please try later. Shukran');
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // first template
+          templateParams,
+          import.meta.env.VITE_EMAILJS_USER_ID
+        );
+
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, // second template
+          templateParams,
+          import.meta.env.VITE_EMAILJS_USER_ID
+        );
+
+
+      message.success('Enquiry sent successfully!');
+
+      // message.info('Sorry! message service is under maintenance now.please try later. Shukran');
 
       
       // setSubmitStatus('success');
