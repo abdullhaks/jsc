@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Calendar, Clock, MapPin, ExternalLink, Sparkles, Users, Star, ArrowRight } from 'lucide-react';
 import event1 from '../assets/event1.jpg';
@@ -42,16 +42,21 @@ const events = [
     status: ''
   }
 ].sort((a, b) => {
-  const now = new Date(); // Current date and time in UTC (09:45 PM IST)
+  const now = new Date();
   const diffA = a.dateAndTime - now;
   const diffB = b.dateAndTime - now;
   return diffB > 0 ? (diffA > 0 ? a.dateAndTime - b.dateAndTime : 1) : (diffA > 0 ? -1 : b.dateAndTime - a.dateAndTime);
 });
 
 const UpcomingEvents = () => {
-  const [timeLeft, setTimeLeft] = useState({});
-  const { scrollYProgress } = useScroll();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const [timeLeft, setTimeLeft] = useState({});
+ 
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -89,7 +94,7 @@ const UpcomingEvents = () => {
   };
 
   return (
-    <section id="upcomingEvents" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="upcomingEvents" className="py-16 sm:py-20 lg:py-32 relative overflow-hidden" ref={containerRef}>
       {/* Multi-layered Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50/30 to-pink-50/50" />
@@ -131,30 +136,30 @@ const UpcomingEvents = () => {
               ease: "easeInOut"
             }}
           >
-            <Calendar className={`w-${Math.random() > 0.5 ? '8' : '6'} h-${Math.random() > 0.5 ? '8' : '6'} text-indigo-400`} />
+            <Calendar className={`w-${Math.random() > 0.5 ? '6' : '4'} h-${Math.random() > 0.5 ? '6' : '4'} text-indigo-400`} />
           </motion.div>
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         {/* Section Header */}
         <motion.div 
-          className="text-center mb-16 lg:mb-24"
+          className="text-center mb-12 sm:mb-16 lg:mb-24"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
         >
           <motion.div
-            className="inline-flex items-center space-x-2 bg-indigo-100/50 backdrop-blur-sm border border-indigo-200/50 rounded-full px-6 py-3 mb-6"
+            className="inline-flex items-center space-x-2 bg-indigo-100/50 backdrop-blur-sm border border-indigo-200/50 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6"
             whileHover={{ scale: 1.05 }}
           >
-            <Sparkles className="w-5 h-5 text-indigo-600" />
-            <span className="text-indigo-700 font-semibold">What's Coming</span>
+            <Sparkles className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-600" />
+            <span className="text-indigo-700 font-semibold text-sm sm:text-base">What's Coming</span>
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -176,8 +181,8 @@ const UpcomingEvents = () => {
             </motion.span>
           </motion.h2>
 
-          <motion.p
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          <motion.div
+            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -188,34 +193,29 @@ const UpcomingEvents = () => {
                 href={jeelaniLocation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-light text-cyan-600 transition-colors flex items-center space-x-1"
+                className="font-light text-cyan-600 hover:text-cyan-700 transition-colors flex items-center space-x-1 text-sm sm:text-base"
               >
-                <span>The Weekly Swalath Majlis is normally held every Friday after Maghrib prayers at Jeelani Masjid, Valanchery, Malappuram, Kerala.
-                </span>
-                <ExternalLink className="w-7 h-7" />
-                
+                <span>The Weekly Swalath Majlis is normally held every Friday after Maghrib prayers at Jeelani Masjid, Valanchery, Malappuram, Kerala.</span>
+                <ExternalLink className="w-5 sm:w-6 h-5 sm:h-6" />
               </a>
 
               <a 
                 href={sjiaLocation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-light text-purple-600 transition-colors flex items-center space-x-1"
+                className="font-light text-purple-600 hover:text-purple-700 transition-colors flex items-center space-x-1 text-sm sm:text-base"
               >
-                <span>The Monthly Swalath Majlis normally takes place on the second Sunday of every month after Maghrib prayers at Sheikh Jeelani Islamic Academy, Mankery, Irimbiliyam, Malappuram, Kerala.
-                </span>
-                <ExternalLink className="w-10 h-10" />
-                
-                
+                <span>The Monthly Swalath Majlis normally takes place on the second Sunday of every month after Maghrib prayers at Sheikh Jeelani Islamic Academy, Mankery, Irimbiliyam, Malappuram, Kerala.</span>
+                <ExternalLink className="w-6 sm:w-7 h-6 sm:h-7" />
               </a>
-              <span> 
-                  You are warmly invited to join us in this blessed gathering of remembrance and prayers.
-                </span>
+              <span className="text-sm sm:text-base"> 
+                You are warmly invited to join us in this blessed gathering of remembrance and prayers.
+              </span>
             </div>
-          </motion.p>
+          </motion.div>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mt-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -227,7 +227,7 @@ const UpcomingEvents = () => {
         </motion.div>
 
         {/* Events Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 max-w-4xl mx-auto">
           {events.map((event, index) => (
             <motion.div
               key={index}
@@ -235,11 +235,11 @@ const UpcomingEvents = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: index * 0.3 }}
-              className="group relative"
+              className="group relative w-full max-w-md mx-auto sm:max-w-none"
             >
               {/* Main Event Card */}
               <motion.div
-                className="relative bg-white/90  rounded-3xl overflow-hidden shadow-2xl border border-white/50"
+                className="relative bg-white/90 rounded-3xl overflow-hidden shadow-2xl border border-white/50"
                 whileHover={{ 
                   y: -15,
                   scale: 1.02,
@@ -250,7 +250,7 @@ const UpcomingEvents = () => {
               >
                 {/* Status Badge */}
                 <motion.div
-                  className={`absolute top-6 left-6 z-20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm ${
+                  className={`absolute top-4 sm:top-6 left-4 sm:left-6 z-20 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-sm ${
                     event.status === 'Registration Open' 
                       ? 'bg-emerald-500/90 text-white' 
                       : 'bg-orange-500/90 text-white'
@@ -264,7 +264,7 @@ const UpcomingEvents = () => {
 
                 {/* Category Badge */}
                 <motion.div
-                  className="absolute top-6 right-6 z-20 px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/90 text-white backdrop-blur-sm"
+                  className="absolute top-4 sm:top-6 right-4 sm:right-6 z-20 px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/90 text-white backdrop-blur-sm"
                   initial={{ scale: 0, rotate: 180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   transition={{ delay: index * 0.3 + 0.7, duration: 0.6 }}
@@ -273,7 +273,7 @@ const UpcomingEvents = () => {
                 </motion.div>
 
                 {/* Image Section with Adaptive Sizing */}
-                <div className="relative h-64 lg:h-80 overflow-hidden">
+                <div className="relative h-56 sm:h-64 lg:h-80 overflow-hidden">
                   <motion.img
                     src={event.eventPosterImage || dhikr}
                     alt={event.eventName}
@@ -292,29 +292,29 @@ const UpcomingEvents = () => {
                   {/* Floating Countdown */}
                   {timeLeft[index] && (
                     <motion.div
-                      className="absolute bottom-4 left-4 right-4"
+                      className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.3 + 1, duration: 0.6 }}
                     >
-                      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4">
+                      <div className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4">
                         <div className="text-center">
-                          <p className="text-sm font-medium text-gray-600 mb-2">Event Starts In</p>
-                          <div className="grid grid-cols-4 gap-2 text-center">
-                            <div className="bg-indigo-100 rounded-lg p-2">
-                              <div className="text-lg font-bold text-indigo-700">{timeLeft[index].days}</div>
+                          <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1 sm:mb-2">Event Starts In</p>
+                          <div className="grid grid-cols-4 gap-1 sm:gap-2 text-center">
+                            <div className="bg-indigo-100 rounded-lg p-1 sm:p-2">
+                              <div className="text-sm sm:text-lg font-bold text-indigo-700">{timeLeft[index].days}</div>
                               <div className="text-xs text-gray-500">Days</div>
                             </div>
-                            <div className="bg-purple-100 rounded-lg p-2">
-                              <div className="text-lg font-bold text-purple-700">{timeLeft[index].hours}</div>
+                            <div className="bg-purple-100 rounded-lg p-1 sm:p-2">
+                              <div className="text-sm sm:text-lg font-bold text-purple-700">{timeLeft[index].hours}</div>
                               <div className="text-xs text-gray-500">Hours</div>
                             </div>
-                            <div className="bg-pink-100 rounded-lg p-2">
-                              <div className="text-lg font-bold text-pink-700">{timeLeft[index].minutes}</div>
+                            <div className="bg-pink-100 rounded-lg p-1 sm:p-2">
+                              <div className="text-sm sm:text-lg font-bold text-pink-700">{timeLeft[index].minutes}</div>
                               <div className="text-xs text-gray-500">Min</div>
                             </div>
-                            <div className="bg-orange-100 rounded-lg p-2">
-                              <div className="text-lg font-bold text-orange-700">{timeLeft[index].seconds}</div>
+                            <div className="bg-orange-100 rounded-lg p-1 sm:p-2">
+                              <div className="text-sm sm:text-lg font-bold text-orange-700">{timeLeft[index].seconds}</div>
                               <div className="text-xs text-gray-500">Sec</div>
                             </div>
                           </div>
@@ -325,23 +325,23 @@ const UpcomingEvents = () => {
 
                   {!timeLeft[index] && (
                     <motion.div
-                      className="absolute bottom-4 left-4 right-4"
+                      className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.3 + 1, duration: 0.6 }}
                     >
-                      <div className="bg-red-500/90 backdrop-blur-sm rounded-2xl p-4 text-center">
-                        <p className="text-white font-semibold">Event Has Started/Ended</p>
+                      <div className="bg-red-500/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center">
+                        <p className="text-white font-semibold text-xs sm:text-sm">Event Has Started/Ended</p>
                       </div>
                     </motion.div>
                   )}
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6 lg:p-8">
+                <div className="p-4 sm:p-6 lg:p-8">
                   {/* Event Title */}
                   <motion.h3
-                    className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-indigo-700 transition-colors"
+                    className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-indigo-700 transition-colors"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.3 + 0.3, duration: 0.6 }}
@@ -351,7 +351,7 @@ const UpcomingEvents = () => {
 
                   {/* Description */}
                   <motion.p
-                    className="text-gray-600 leading-relaxed mb-6"
+                    className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.3 + 0.4, duration: 0.6 }}
@@ -361,66 +361,66 @@ const UpcomingEvents = () => {
 
                   {/* Event Details */}
                   <motion.div
-                    className="space-y-4 mb-6"
+                    className="space-y-3 sm:space-y-4 mb-4 sm:mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.3 + 0.5, duration: 0.6 }}
                   >
                     <div className="flex items-center space-x-3 text-gray-700">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                        <Calendar className="w-5 h-5 text-indigo-600" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-600" />
                       </div>
                       <div>
-                        <p className="font-medium">{formatDate(event.dateAndTime)}</p>
+                        <p className="font-medium text-sm sm:text-base">{formatDate(event.dateAndTime)}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center space-x-3 text-gray-700">
-                      <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                        <MapPin className="w-5 h-5 text-purple-600" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <MapPin className="w-4 sm:w-5 h-4 sm:h-5 text-purple-600" />
                       </div>
                       <div>
                         <a 
                           href={event.locationLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-medium hover:text-purple-600 transition-colors flex items-center space-x-1"
+                          className="font-medium hover:text-purple-600 transition-colors flex items-center space-x-1 text-sm sm:text-base"
                         >
                           <span>{event.location}</span>
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink className="w-4 sm:w-5 h-4 sm:h-5" />
                         </a>
                       </div>
                     </div>
 
                     <div className="flex items-center space-x-3 text-gray-700">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <Users className="w-5 h-5 text-emerald-600" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                        <Users className="w-4 sm:w-5 h-4 sm:h-5 text-emerald-600" />
                       </div>
                       <div>
-                        <p className="font-medium">{event.attendees}</p>
+                        <p className="font-medium text-sm sm:text-base">{event.attendees}</p>
                       </div>
                     </div>
                   </motion.div>
 
                   {/* CTA Button */}
                   <a href={event.locationLink}>
-                  <motion.button
-                    className="w-full group/btn flex items-center justify-center space-x-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.3 + 0.8, duration: 0.6 }}
-                  >
-                    <span>Get Location</span>
-                    <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                  </motion.button>
+                    <motion.button
+                      className="w-full group/btn flex items-center justify-center space-x-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.3 + 0.8, duration: 0.6 }}
+                    >
+                      <span className="text-sm sm:text-base">Get Location</span>
+                      <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover/btn:translate-x-1 transition-transform" />
+                    </motion.button>
                   </a>
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-70" />
-                <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-70" />
+                <div className="absolute -top-2 -right-2 w-3 sm:w-4 h-3 sm:h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-70" />
+                <div className="absolute -bottom-2 -left-2 w-4 sm:w-6 h-4 sm:h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-70" />
               </motion.div>
 
               {/* Floating Stars */}
@@ -443,7 +443,7 @@ const UpcomingEvents = () => {
                     delay: i * 0.5,
                   }}
                 >
-                  <Star className="w-4 h-4 text-indigo-400 fill-current" />
+                  <Star className="w-3 sm:w-4 h-3 sm:h-4 text-indigo-400 fill-current" />
                 </motion.div>
               ))}
             </motion.div>
@@ -452,21 +452,21 @@ const UpcomingEvents = () => {
 
         {/* Call to Action */}
         <motion.div
-          className="text-center mt-16 lg:mt-24"
+          className="text-center mt-12 sm:mt-16 lg:mt-24"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           <motion.button
-            className="group inline-flex items-center space-x-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+            className="group inline-flex items-center space-x-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <Calendar className="w-6 h-6" />
-            <span>View All Events</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Calendar className="w-5 sm:w-6 h-5 sm:h-6" />
+            <span className="text-sm sm:text-base">View All Events</span>
+            <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
         </motion.div>
       </div>

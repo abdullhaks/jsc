@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Crown, Star, Award, Users, BookOpen, Heart, Quote, ChevronRight, Sparkles } from 'lucide-react';
 import leader1 from '../assets/leader1.jpg';
@@ -42,6 +42,7 @@ const leaders = [
 ];
 
 const Leaders = () => {
+  const containerRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
