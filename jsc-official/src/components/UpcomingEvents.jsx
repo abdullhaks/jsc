@@ -14,7 +14,7 @@ const events = [
     dateAndTime: new Date('2025-08-10T16:00:00'),
     location: 'Irimbiliyam, Mankeri,Valanchery,Malappuram, Kerala',
     locationLink: sjiaLocation,
-    description: 'Join us for a transformative spiritual journey through traditional Sufi meditation practices and dhikr.',
+    description: `Join us for a transformative spiritual journey through traditional Sufi meditation practices and dhikr. NB : Transportation facility availble from Valanchery - Time : 3PM , 3:30PM, Special facilities for women  `,
     category: 'Spiritual',
     attendees: '',
     status: ''
