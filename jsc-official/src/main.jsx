@@ -4,7 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import './i18n';
 import '@ant-design/v5-patch-for-react-19';
-
+import { BrowserRouter } from 'react-router-dom'; 
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -21,6 +21,8 @@ if ('serviceWorker' in navigator) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter> {/* Wrap App with BrowserRouter */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

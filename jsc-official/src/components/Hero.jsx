@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowDown, Sparkles, BookOpen, Heart, Star, Calendar, Book, Compass, Clock, Users, Mic, GraduationCap } from 'lucide-react';
-
+import {useNavigate} from 'react-router-dom'
 import jsc_logo2 from '../assets/jsc_logo2.png'
 
 const LogoPlaceholder = () => (
@@ -107,6 +107,7 @@ const Hero = () => {
   const { t } = useTranslation();
   const { scrollY } = useScroll();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
   
   const y = useTransform(scrollY, [0, 1000], [0, -200]);
   const opacity = useTransform(scrollY, [0, 1800], [1, 0]);
@@ -144,9 +145,10 @@ const Hero = () => {
     { symbol: '✦', color: 'text-amber-300', size: 'text-lg', x: 95, y: 40 },
   ];
 
+
   // Islamic app data with more vibrant colors
   const islamicApps = [
-    { icon: Book, label: 'Quran', color: 'from-emerald-500 via-green-500 to-teal-500' },
+    { icon: Book, label: 'Quran', color: 'from-emerald-500 via-green-500 to-teal-500', onClick: () => navigate('/quran') },
     // { icon: Clock, label: 'Prayer', color: 'from-blue-500 via-indigo-500 to-purple-500' },
     // { icon: Compass, label: 'Qibla', color: 'from-purple-500 via-pink-500 to-rose-500' },
     { icon: Mic, label: 'Dhikr', color: 'from-teal-500 via-cyan-500 to-blue-500' },
@@ -342,10 +344,10 @@ const Hero = () => {
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <span className="block bg-gradient-to-r from-emerald-700 via-green-600 via-teal-600 to-emerald-700 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-emerald-700 via-green-600  to-emerald-700 bg-clip-text text-transparent">
                 Jeelani Studies
               </span>
-              <span className="block bg-gradient-to-r from-green-700 via-emerald-600 via-teal-600 to-green-700 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-green-700 via-emerald-600  to-green-700 bg-clip-text text-transparent">
                 Centre
               </span>
             </motion.h1>
@@ -460,49 +462,50 @@ const Hero = () => {
             </h3>
             
             <div className="flex flex-col-6 sm:flex-row items-center justify-center gap-3 sm:gap-6 max-w-2xl sm:max-w-4xl mx-auto px-4">
-              {islamicApps.map((app, index) => (
-                <motion.div
-                  key={index}
-                  className="group relative"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay:0, duration: 0.5, type: "spring" }}
-                  whileHover={{ y: -6, scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <motion.div 
-                    className={`relative bg-gradient-to-br ${app.color} p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-white/30 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl aspect-square flex flex-col items-center justify-center`}
-                    animate={{
-                      boxShadow: [
-                        '0 4px 15px rgba(0, 0, 0, 0.1)',
-                        '0 8px 25px rgba(0, 0, 0, 0.15)',
-                        '0 4px 15px rgba(0, 0, 0, 0.1)'
-                      ]
-                    }}
-                    transition={{ duration: 1, repeat: Infinity, delay:0.0 }}
+                {islamicApps.map((app, index) => (
+                  <motion.div
+                    key={index}
+                    className="group relative cursor-pointer" // Add cursor-pointer
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay:0, duration: 0.5, type: "spring" }}
+                    whileHover={{ y: -6, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={app.onClick} // Add onClick handler
                   >
-                    <app.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white mb-1 sm:mb-2" />
-                    <h4 className="text-white font-semibold text-xs sm:text-sm text-center leading-tight">{app.label}</h4>
-                    
-                    {/* Shine effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100"
+                    <motion.div 
+                      className={`relative bg-gradient-to-br ${app.color} p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-white/30 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl aspect-square flex flex-col items-center justify-center`}
                       animate={{
-                        x: ['-100%', '100%']
+                        boxShadow: [
+                          '0 4px 15px rgba(0, 0, 0, 0.1)',
+                          '0 8px 25px rgba(0, 0, 0, 0.15)',
+                          '0 4px 15px rgba(0, 0, 0, 0.1)'
+                        ]
                       }}
-                      transition={{
-                        duration: 0.6,
-                        repeat: 0,
-                        ease: "easeInOut"
-                      }}
-                      style={{
-                        transform: 'skewX(-20deg)'
-                      }}
-                    />
+                      transition={{ duration: 1, repeat: Infinity, delay:0.0 }}
+                    >
+                      <app.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white mb-1 sm:mb-2" />
+                      <h4 className="text-white font-semibold text-xs sm:text-sm text-center leading-tight">{app.label}</h4>
+                      
+                      {/* Shine effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100"
+                        animate={{
+                          x: ['-100%', '100%']
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: 0,
+                          ease: "easeInOut"
+                        }}
+                        style={{
+                          transform: 'skewX(-20deg)'
+                        }}
+                      />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </div>
 
             {/* Enhanced Inspirational quote */}
             <motion.div

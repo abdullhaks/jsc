@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, BookOpen, Users, Calendar, Youtube, FileText, Download, Mail, Globe, ChevronDown, Star, Languages } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate and useLocation
 import jsc_logo1 from '../assets/jsc_logo1.png';
 
 export const Header = ({ activeSection, setActiveSection }) => {
@@ -9,6 +10,8 @@ export const Header = ({ activeSection, setActiveSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLangDropdown, setShowLangDropdown] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
+  const location = useLocation(); // Hook to get current route
 
   const navItems = [
     { id: 'hero', label: 'Home', icon: <Globe className="w-4 h-4" /> },
@@ -39,15 +42,32 @@ export const Header = ({ activeSection, setActiveSection }) => {
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
     e.stopPropagation();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setActiveSection(sectionId);
+
+    // If not on the homepage, navigate to the homepage first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete before scrolling
       setTimeout(() => {
-        setIsMenuOpen(false);
-        setShowLangDropdown(false);
-      }, 300);
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setActiveSection(sectionId);
+        }
+      }, 100); // Small delay to ensure DOM is updated after navigation
+    } else {
+      // If already on the homepage, scroll directly
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection(sectionId);
+      }
     }
+
+    // Close menu and dropdown
+    setTimeout(() => {
+      setIsMenuOpen(false);
+      setShowLangDropdown(false);
+    }, 300);
   };
 
   const changeLanguage = (code) => {
@@ -85,7 +105,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3 min-h-[64px]">
             
-            {/* Logo Section - Fixed width to prevent layout shifts */}
+            {/* Logo Section */}
             <motion.div 
               className="flex items-center space-x-3 cursor-pointer group flex-shrink-0"
               style={{ minWidth: 'fit-content' }}
@@ -134,14 +154,14 @@ export const Header = ({ activeSection, setActiveSection }) => {
               </div>
             </motion.div>
 
-            {/* Desktop Navigation - Hidden on mobile */}
+            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.id}
                   onClick={(e) => scrollToSection(e, item.id)}
                   className={`relative flex items-center space-x-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 group ${
-                    activeSection === item.id
+                    activeSection === item.id && location.pathname === '/'
                       ? 'text-white bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg'
                       : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
                   }`}
@@ -151,7 +171,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.3 }}
                 >
-                  {activeSection === item.id && (
+                  {activeSection === item.id && location.pathname === '/' && (
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl"
                       layoutId="activeNavBg"
@@ -210,7 +230,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                 </AnimatePresence>
               </div>
 
-              {/* Mobile Language Button - Separate from menu toggle */}
+              {/* Mobile Language Button */}
               <div className="relative lg:hidden">
                 <motion.button
                   onClick={() => setShowLangDropdown(!showLangDropdown)}
@@ -286,7 +306,7 @@ export const Header = ({ activeSection, setActiveSection }) => {
                       key={item.id}
                       onClick={(e) => scrollToSection(e, item.id)}
                       className={`flex items-center space-x-3 w-full text-left px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg mx-2 ${
-                        activeSection === item.id
+                        activeSection === item.id && location.pathname === '/'
                           ? 'text-emerald-700 bg-emerald-50'
                           : 'text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50'
                       }`}

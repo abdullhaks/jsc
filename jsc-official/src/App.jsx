@@ -10,9 +10,12 @@ import Publications from './components/Publications';
 import Downloads from './components/Downloads';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
+import QuranSurahs from './components/QuranSurahs';
+import Surah from './components/Surah';
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState('hero');
+const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,17 +35,26 @@ const App = () => {
   return (
     <div className="min-h-screen font-sans relative overflow-x-hidden">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
-      <Hero />
-      <UpcomingEvents />
-      <Leaders />
-      <RecentUploads />
-      <PublicEvents />
-      <Publications />
-      <Downloads />
-      <Contact />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            <UpcomingEvents />
+            <Leaders />
+            <RecentUploads />
+            <PublicEvents />
+            <Publications />
+            <Downloads />
+            <Contact />
+          </>
+        } />
+        <Route path="/quran" element={<QuranSurahs />} />
+        <Route path="/surah/:id" element={<Surah />} />
+      </Routes>
       <Footer />
     </div>
   );
+
 };
 
 export default App;
