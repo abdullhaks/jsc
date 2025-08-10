@@ -148,7 +148,7 @@ const Hero = () => {
 
   // Islamic app data with more vibrant colors
   const islamicApps = [
-    { icon: Book, label: 'Quran', color: 'from-emerald-500 via-green-500 to-teal-500', onClick: () => navigate('/quran') },
+   { icon: Book, label: 'Quran', color: 'from-emerald-500 via-green-500 to-teal-500', onClick: () => navigate('/quran') },
     // { icon: Clock, label: 'Prayer', color: 'from-blue-500 via-indigo-500 to-purple-500' },
     // { icon: Compass, label: 'Qibla', color: 'from-purple-500 via-pink-500 to-rose-500' },
     { icon: Mic, label: 'Dhikr', color: 'from-teal-500 via-cyan-500 to-blue-500' },
@@ -301,11 +301,11 @@ const Hero = () => {
 
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
-        <div className="text-center space-y-2 sm:space-y-2">
+        <div className="text-center space-y-2 sm:space-y-8">
           
           {/* Enhanced Logo section */}
           <motion.div
-            className="relative mx-auto w-fit"
+            className="relative mx-auto w-fit pt-8"
             initial={{ opacity: 0, scale: 0.5, y: -50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", type: "spring" }}

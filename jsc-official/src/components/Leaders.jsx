@@ -116,10 +116,10 @@ const Leaders = () => {
             transition={{ duration: 1, delay: 0.2 }}
           >
             <span className="bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent">
-              Guiding Lights of
+              Guiding Lights
             </span>
             <br />
-            <motion.span 
+            {/* <motion.span 
               className="bg-gradient-to-r from-teal-600 via-emerald-700 to-teal-800 bg-clip-text text-transparent"
               animate={{ 
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -129,7 +129,7 @@ const Leaders = () => {
             >
                 
               Islamic Excellence
-            </motion.span>
+            </motion.span> */}
           </motion.h2>
 
           <motion.p
@@ -139,7 +139,7 @@ const Leaders = () => {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            Meet the distinguished scholars and leaders who dedicate their lives to preserving and spreading 
+            Meet the distinguished scholars and leaders who dedicate their lives to preserv and spread 
             the authentic teachings of Islam through wisdom, compassion, and unwavering commitment.
           </motion.p>
         </motion.div>
