@@ -34,7 +34,7 @@ const leaders = [
     role: 'Spiritual Leader & Scholar',
     image: leader3,
     description: 'Dedicated community leader with extensive experience in social work and Islamic counseling.',
-    expertise: ['Community Building', 'Social Work', 'Women\'s Programs'],
+    expertise: ['Community Building', 'Social Work',],
     quote: 'True strength lies in serving our community with compassion and wisdom.',
     achievements: '50+ Years Service',
     icon: <Heart className="w-6 h-6" />
