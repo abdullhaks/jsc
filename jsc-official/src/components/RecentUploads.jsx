@@ -55,14 +55,14 @@ const uploads = [
   },
 
    { 
-    title: 'നബിദിനാഘോഷം തങ്ങളുടെ വഫാത്ത് ദിനത്തിലോ? | ശൈഖ് മുഹമ്മദ് അബ്ദുൽ മജീദ് ഹുദവി', 
-    link: 'https://youtu.be/xC0tZXGnoJY?si=Wf99hXuBSkkkAEM2', 
-    thumbnail: "https://ik.imagekit.io/aksWebSolutions/JSC/IMG_1370.JPG?updatedAt=1754547837011",
+    title: 'ജീലാനി സമ്മേളന കൊടിയേറ്റം 2022 - ശൈഖ് അബ്ദുൽ മജീദ് ഹുദവി പൂങ്ങോട്', 
+    link: 'https://youtu.be/JxOfJpG0iyw?si=m4B0TBHlzNNRQixs', 
+    thumbnail: "https://ik.imagekit.io/aksWebSolutions/JSC/JxOfJpG0iyw-SD.jpg?updatedAt=1755574249694",
     platform: 'youtube',
-    duration: '34:36',
+    duration: '1:04:27',
     views: '',
     uploadDate: '',
-    description: 'നബിദിനാഘോഷം തങ്ങളുടെ വഫാത്ത് ദിനത്തിലോ? | മീലാദ് സമ്മേളനം 2024 | ശൈഖ് മുഹമ്മദ് അബ്ദുൽ മജീദ് ഹുദവി',
+    description: 'ജീലാനി സമ്മേളന കൊടിയേറ്റം - 22 അനുസ്മരണ പ്രഭാഷണം, ശൈഖ് അബ്ദുൽ മജീദ് ഹുദവി പൂങ്ങോട് ',
     category: 'Spiritual'
   },
 
