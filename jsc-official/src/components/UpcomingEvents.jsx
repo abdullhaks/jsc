@@ -6,15 +6,29 @@ import dhikr from '../assets/dhikr.jpg'
 
 const jeelaniLocation = "https://maps.app.goo.gl/VY6p12Zt2vt8C8W69";
 const sjiaLocation = "https://maps.app.goo.gl/tRXGDLnN5P8Ac8z46"
+let today = new Date();
+let start = new Date('2025-08-25T19:00:00');
+let end = new Date('2025-09-19T20:00:00');
+let dt ;
+
+if(today >= start && today <= end){
+today.setHours(19);
+today.setMinutes(0);
+today.setMilliseconds(0)
+dt = new Date(today)
+}else{
+  dt= start;
+}
+
 
 const events = [
   {
-    eventName: 'മീലാദ് @ 1500 Campaign inauguration & Monthly Swalath Majlis',
-    eventPosterImage: "https://ik.imagekit.io/aksWebSolutions/JSC/meelad@1500.jpg?updatedAt=1754798653042",
-    dateAndTime: new Date('2025-08-10T16:00:00'),
-    location: 'Irimbiliyam, Mankeri,Valanchery,Malappuram, Kerala',
-    locationLink: sjiaLocation,
-    description: `Join us for a transformative spiritual journey through traditional Sufi meditation practices and dhikr. NB : Transportation facility availble from Valanchery - Time : 3PM , 3:30PM, Special facilities for women  `,
+    eventName: 'ഇശ്ഖിലലിയാം - പ്രകീർത്തന സദസ്സ് - Aug-25 to Sep 19 ',
+    eventPosterImage: "https://ik.imagekit.io/aksWebSolutions/JSC/WhatsApp%20Image%202025-08-20%20at%202.56.32%20PM.jpeg?updatedAt=1755682349752",
+    dateAndTime: dt,
+    location: 'Jeelani Masjid, Valancheri, Malppuram, Kerala',
+    locationLink: jeelaniLocation,
+    description: `ഇശ്ഖിലലിയാം - പ്രകീർത്തന സദസ്സ് - from Aug-25 to Sep 19 , at 7:00PM - 8:00PM`,
     category: 'Spiritual',
     attendees: '',
     status: ''
@@ -22,7 +36,7 @@ const events = [
   {
     eventName: 'Weekly Swalath Majlis',
     eventPosterImage: "",
-    dateAndTime: new Date('2025-08-08T19:00:00'),
+    dateAndTime: new Date('2025-08-22T19:00:00'),
     location: 'Jeelani Masjid, Valancheri, Malppuram, Kerala',
     locationLink: jeelaniLocation,
     description: 'join weekly swalath majis',
@@ -33,7 +47,7 @@ const events = [
   {
     eventName: 'Weekly Swalath Majlis',
     eventPosterImage: "",
-    dateAndTime: new Date('2025-08-01T19:00:00'),
+    dateAndTime: new Date('2025-08-29T19:00:00'),
     location: 'Jeelani Masjid, Valancheri, Malppuram, Kerala',
     locationLink: jeelaniLocation,
     description: 'join weekly swalath majis',
